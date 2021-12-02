@@ -53,7 +53,9 @@ class LoginView(APIView):
         refresh = get_refresh_token()
 
         Jwt.objects.create(
-            user_id=user.id, access=access.decode(), refresh=refresh.decode()
+            user_id=user.id, 
+            access=access,
+            refresh=refresh
         )
 
         return Response({"access": access, "refresh": refresh})
@@ -68,7 +70,7 @@ class RegisterView(APIView):
 
         CustomUser.objects._create_user(**serializer.validated_data)
 
-        return Response({"success": "User created."})
+        return Response({"success": "User created."}, status=201)
 
 
 class RefreshView(APIView):
@@ -89,8 +91,8 @@ class RefreshView(APIView):
         access = get_access_token({"user_id": active_jwt.user.id})
         refresh = get_refresh_token()
 
-        active_jwt.access = access.decode()
-        active_jwt.refresh = refresh.decode()
+        active_jwt.access = access
+        active_jwt.refresh = refresh
         active_jwt.save()
 
         return Response({"access": access, "refresh": refresh})

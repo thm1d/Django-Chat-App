@@ -1,5 +1,5 @@
-from django.urls import path, include
-from .views import LoginView, RegisterView, RefreshView, GetSecuredInfo
+from django.urls import path
+from .views import LoginView, RegisterView, RefreshView
 
 urlpatterns = [
     path('login', LoginView.as_view()),
