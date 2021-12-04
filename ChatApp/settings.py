@@ -125,6 +125,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# MEDIA_URL = '/images/'
+# STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = [
+#     'gs://photoalbum-b6500.appspot.com'
+# ]
+
+# MEDIA_ROOT = BASE_DIR / 'static/image'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

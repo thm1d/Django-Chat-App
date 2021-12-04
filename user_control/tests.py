@@ -1,6 +1,7 @@
 from django.test import TestCase
 from rest_framework.test import APITestCase
-from .views import get_access_token, get_random, get_refresh_token
+from .views import get_access_token, get_random, get_refresh_token, UserProfileView
+from .models import CustomUser
 
 
 class TestGenericFunctions(APITestCase):
@@ -101,3 +102,19 @@ class TestAuth(APITestCase):
         # check that we obtained both the refresh and access token
         self.assertTrue(result["access"])
         self.assertTrue(result["refresh"])
+
+class TestUserInfo(APITestCase):
+    profile_url = "/user/profile"
+    file_upload_url = "/message/file-upload"
+    login_url = "/user/login"
+
+    def setUp(self):
+        payload = {
+            "username": "thm1d",
+            "password": "thm1d23"
+        }
+
+        self.user = CustomUser.objects._create_user(**payload)
+
+        # login
+        self.client.force_authentication(user=self.user)
